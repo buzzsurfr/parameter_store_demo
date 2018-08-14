@@ -1,10 +1,10 @@
-FROM python:2.7-alpine3.7
+FROM python:2.7
 
-COPY app.py requirements.txt /app/
+RUN pip install awscli
+RUN aws configure set default.region us-east-1
+
+COPY config.ini pull_secrets.sh /app/
 WORKDIR /app
 
-RUN pip install -r requirements.txt
-
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+CMD ["/app/pull_secrets.sh", ";", "cat /app/config.ini"]
 
