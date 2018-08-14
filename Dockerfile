@@ -6,5 +6,5 @@ RUN aws configure set default.region us-east-1
 COPY config.ini pull_secrets.sh /app/
 WORKDIR /app
 
-CMD ["/app/pull_secrets.sh", ";", "cat /app/config.ini"]
+CMD ["sh", "-c", "/app/pull_secrets.sh ; cat /app/config.ini"]
 
